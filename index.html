@@ -708,12 +708,12 @@ const EXAMS = {
   csat: {
     name: '學測／指考',
     levels: [
-      { id:'L1', name:'第一級', color:'#1e7a45', bg:'#ccffcc' },
-      { id:'L2', name:'第二級', color:'#1a5cb5', bg:'#ffff99' },
-      { id:'L3', name:'第三級', color:'#7025b8', bg:'#99ddff' },
-      { id:'L4', name:'第四級', color:'#9a7000', bg:'#ccdcb4' },
-      { id:'L5', name:'第五級', color:'#c24000', bg:'#ffcccc' },
-      { id:'L6', name:'第六級', color:'#c0006e', bg:'#d1b8ed' },
+      { id:'L1', name:'第一級', color:'#ccffcc', bg:'#ccffcc' },
+      { id:'L2', name:'第二級', color:'#ffff99', bg:'#ffff99' },
+      { id:'L3', name:'第三級', color:'#99ddff', bg:'#99ddff' },
+      { id:'L4', name:'第四級', color:'#ccdcb4', bg:'#ccdcb4' },
+      { id:'L5', name:'第五級', color:'#ffcccc', bg:'#ffcccc' },
+      { id:'L6', name:'第六級', color:'#d1b8ed', bg:'#d1b8ed' },
     ]
   },
   gept: {
@@ -1114,14 +1114,14 @@ function buildFilterStrip() {
     const on = activeFilters.has(lv.id);
     const badge = document.createElement('label');
     badge.className = `filter-badge ${on?'on':''}`;
-    badge.style.cssText = on ? `background:${lv.bg};border-color:${lv.color};color:${lv.color}` : '';
+    badge.style.cssText = on ? `background:${lv.bg};border-color:${lv.color};color:#000` : '';
     badge.innerHTML = `
       <input type="checkbox" value="${lv.id}" ${on?'checked':''}>
       <span class="pip" style="background:${lv.color}"></span>
       ${lv.name}
     `;
     badge.querySelector('input').addEventListener('change', function() {
-      if (this.checked) { activeFilters.add(lv.id); badge.classList.add('on'); badge.style.cssText = `background:${lv.bg};border-color:${lv.color};color:${lv.color}`; }
+      if (this.checked) { activeFilters.add(lv.id); badge.classList.add('on'); badge.style.cssText = `background:${lv.bg};border-color:${lv.color};color:#000`; }
       else { activeFilters.delete(lv.id); badge.classList.remove('on'); badge.style.cssText = ''; }
       // Persist this exam's filter selection
       savedFilters[currentExam] = new Set(activeFilters);
@@ -1189,7 +1189,7 @@ function renderArticle() {
   if (infoArr.length > 1) {
     const badges = infoArr.slice(1).map(info => {
       const lc = cfg.levels.find(l => l.id === info.level);
-      return `<sup style="font-size:.55em;background:${lc?.color};color:#fff;padding:0 2px;border-radius:2px;margin-left:1px;vertical-align:super;line-height:1">${lc?.name?.slice(0,2)||info.level}</sup>`;
+      return `<sup style="font-size:.55em;background:${lc?.color};color:#000;padding:0 2px;border-radius:2px;margin-left:1px;vertical-align:super;line-height:1">${lc?.name?.slice(0,2)||info.level}</sup>`;
     }).join('');
     inner += badges;
   }
@@ -1201,9 +1201,9 @@ function renderArticle() {
 
   // Summary
   document.getElementById('summary-strip').innerHTML = cfg.levels.map(lv =>
-    `<span class="summary-chip" style="border-color:${lv.color}44">
+    `<span class="summary-chip" style="border-color:${lv.color}">
        <span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:${lv.color};margin-right:4px;vertical-align:middle"></span>
-       ${lv.name} <strong style="color:${lv.color}">${counts[lv.id]||0}</strong>
+       ${lv.name} <strong style="color:#000">${counts[lv.id]||0}</strong>
      </span>`
   ).join('');
 }
@@ -1257,7 +1257,7 @@ function renderTable() {
     ${cfg.levels.map(l => {
       const n = counts[l.id]; if (!n) return '';
       const pct = Math.round(n/total*100);
-      return `<span class="stats-pill" style="background:${l.bg};color:${l.color}">${l.name} ${n}（${pct}%）</span>`;
+      return `<span class="stats-pill" style="background:${l.bg};color:#000">${l.name} ${n}（${pct}%）</span>`;
     }).join('')}
   </div>`;
 
@@ -1271,7 +1271,7 @@ function renderTable() {
     </tr></thead>
     <tbody id="word-tbody">${rows.map((r,i) => {
       const lvCfg = cfg.levels.find(l => l.id === r.level);
-      const c = lvCfg?.color||'#60584e', bg = lvCfg?.bg||'#eceae6';
+      const c = '#000', bg = lvCfg?.bg||'#eceae6';
       const yahoo = `https://tw.dictionary.yahoo.com/dictionary?p=${encodeURIComponent(r.word)}`;
       const wordCell = r.surface !== r.word
         ? `${escHtml(r.surface)}<small style="color:var(--ink3);margin-left:4px">(${escHtml(r.word)})</small>`
