@@ -640,7 +640,7 @@ tr:last-child td { border-bottom: none; }
         <span style="font-size:1rem;flex-shrink:0">☁</span>
         <div style="font-size:.78rem;line-height:1.9;color:var(--ink2)">
           <strong style="color:var(--sumi)">資料來源</strong>　網頁開啟時會自動向 GitHub 讀取最新的字詞表 CSV。<br>
-          欄位：<code style="background:var(--border2);padding:1px 6px;border-radius:3px;font-family:'DM Mono',monospace">級數, 字彙, 中文釋義/詞性, 變化型態</code>
+          欄位：<code style="background:var(--border2);padding:1px 6px;border-radius:3px;font-family:'DM Mono',monospace">級數, 字彙, 中文釋義/詞性, 變化型態, 衍生副詞</code>
           &nbsp;·&nbsp; 級數值：第一級 ～ 第六級<br>
           <span style="color:var(--ink3)">※ 如需更新字詞表內容，請直接更新 GitHub 上的 CSV 檔案；本頁不需重新部署即可自動抓到最新版本。</span>
         </div>
@@ -873,6 +873,7 @@ function parseCsatCsv(rows) {
     const rawWord= String(r['字彙']||'').trim();
     const posRaw = String(r['中文釋義/詞性']||'').trim();
     const formsRaw = String(r['變化型態']||'').trim();
+    const derivedAdvRaw = String(r['衍生副詞']||'').trim();
     if (!rawWord || !level) return;
 
     // Parse parenthetical variants: accomplish(ment) → accomplish
@@ -897,6 +898,15 @@ function parseCsatCsv(rows) {
     // 直接建立字典比對項，讓 lookupWord 不必仰賴詞形還原規則即可命中
     if (formsRaw) {
       formsRaw.split(/[,、，]/)
+        .map(f => f.trim().toLowerCase())
+        .filter(f => f.length >= 1 && /^[a-z]/i.test(f))
+        .forEach(f => addEntry(f, entry));
+    }
+
+    // 衍生副詞：形容詞衍生出的副詞形態（如 able→ably、careful→carefully），
+    // 同樣直接建立比對項，比對到時歸屬同一個字級
+    if (derivedAdvRaw) {
+      derivedAdvRaw.split(/[,、，]/)
         .map(f => f.trim().toLowerCase())
         .filter(f => f.length >= 1 && /^[a-z]/i.test(f))
         .forEach(f => addEntry(f, entry));
@@ -953,8 +963,11 @@ const CSV_SOURCES = {
 };
 
 function parseCsvText(text) {
+  // 去除 UTF-8 BOM（Excel 存成「CSV UTF-8」時常見的隱形字元），
+  // 否則第一個欄位名稱會變成「\uFEFF級數」而比對不到
+  const clean = text.charCodeAt(0) === 0xFEFF ? text.slice(1) : text;
   return new Promise((resolve, reject) => {
-    Papa.parse(text, {
+    Papa.parse(clean, {
       header: true,
       skipEmptyLines: true,
       complete: r => resolve(r.data),
