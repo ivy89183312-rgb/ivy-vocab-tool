@@ -238,7 +238,7 @@
 第一級,down,adv./prep./adj./n./v. ,"downs,downing,downed,downer,downest"
 第一級,dozen,n.,dozens
 第一級,draw,v./n.,"draws,drawing,drew,drawn"
-第一級,dream,n./v.,"dreams,dreaming,dreamed"
+第一級,dream,n./v.,"dreams,dreaming,dreamed,dreamt"
 第一級,dress,n./v.,"dresses,dressing,dressed"
 第一級,drink,v./n.,"drinks,drinking,drank,drunk"
 第一級,drive,v./n.,"drives,driving,drove,driven"
@@ -488,7 +488,7 @@
 第一級,letter,n.,letters
 第一級,level,n./adj.,levels
 第一級,library,n.,libraries
-第一級,lie,v./n.,"lies,lying,lay,lain"
+第一級,lie,v./n.,"lies,lying,lay,lain,lied"
 第一級,life,n.,lives
 第一級,light,n./adj./v./adv.,"lights,lighting,lit,lighter,lightest"
 第一級,like,prep./v./n.,"likes,liking,liked"
@@ -1225,7 +1225,7 @@
 第二級,damage,n./v.,"damages,damaging,damaged"
 第二級,dancer,n.,dancers
 第二級,danger,n.,dangers
-第二級,data,n.,datas
+第二級,data,n.,datum
 第二級,deaf,adj.,"deafer,deafest"
 第二級,debate,n./v.,"debates,debating,debated"
 第二級,debt,n.,debts
@@ -1365,7 +1365,7 @@
 第二級,flight,n.,flights
 第二級,flow,n./v.,"flows,flowing,flowed"
 第二級,flu,n.,flus
-第二級,focus,n./v.,"focuses,focusing,focused"
+第二級,focus,n./v.,"focuses,focusing,focused,foci"
 第二級,fog,n./v.,"fogs,fogging,fogged"
 第二級,folk,n.,folks
 第二級,following,adj./prep./n.,followings
@@ -1831,7 +1831,7 @@
 第二級,soybean,n.,soybeans
 第二級,speaker,n.,speakers
 第二級,speech,n.,speeches
-第二級,speed,n./v.,"speeds,speeding,sped/speeded"
+第二級,speed,n./v.,"speeds,speeding,sped,speeded"
 第二級,spelling,n.,spellings
 第二級,spider,n.,spiders
 第二級,spirit,n.,spirits
@@ -2059,7 +2059,7 @@
 第三級,awkward,adj.,
 第三級,background,n.,backgrounds
 第三級,bacon,n.,bacons
-第三級,bacteria,n.,bacterias
+第三級,bacteria,n.,bacterium
 第三級,badly,adv.,
 第三級,baggage,n.,
 第三級,bait,n./v.,"baits,baiting,baited"
@@ -2826,7 +2826,7 @@
 第三級,spill,v./n.,"spills,spilling,spilled"
 第三級,spin,n./v.,"spins,spinning,spun"
 第三級,spinach,n.,spinaches
-第三級,spit,v./n.,"spits,spitting,spat/spit"
+第三級,spit,v./n.,"spits,spitting,spat,spit"
 第三級,spite,n.,spites
 第三級,splash,n./v.,"splashes,splashing,splashed"
 第三級,spoil,v.,"spoils,spoiling,spoiled"
@@ -3347,7 +3347,7 @@
 第四級,embarrass(ment),v./(n.),"embarrasses,embarrassing,embarrassed,embarrassments"
 第四級,embassy,n.,embassies
 第四級,emerge,v.,"emerges,emerging,emerged"
-第四級,emphasis,n.,emphasises
+第四級,emphasis,n.,emphases
 第四級,empire,n.,empires
 第四級,enclose,v.,"encloses,enclosing,enclosed"
 第四級,encounter,n./v.,"encounters,encountering,encountered"
@@ -3417,7 +3417,7 @@
 第四級,forbid,v.,"forbids,forbidding,forbade,forbidden"
 第四級,forecast,n./v.,"forecasts,forecasting,forecast"
 第四級,formation,n.,formations
-第四級,formula,n.,formulas
+第四級,formula,n.,"formulas,formulae"
 第四級,fort,n.,forts
 第四級,fortunate,adj.,
 第四級,fossil,n./adj.,fossils
@@ -3586,7 +3586,7 @@
 第四級,largely,adv.,
 第四級,launch,v./n.,"launches,launching,launched"
 第四級,lawful,adj.,
-第四級,lean,v./adj.,"leans,leaning,leaned/leant,leaner,leanest"
+第四級,lean,v./adj.,"leans,leaning,leaned,leant,leaner,leanest"
 第四級,learned,adj.,
 第四級,lecture,n./v.,"lectures,lecturing,lectured"
 第四級,lecturer,n.,lecturers
@@ -4116,10 +4116,11 @@
 第五級,bruise,n./v.,"bruises,bruising,bruised"
 第五級,bulk,n.,bulks
 第五級,bully,n./v.,"bullies,bullying,bullied"
-第五級,bureau,n.,bureaus
+第五級,bureau,n.,"bureaus,bureaux"
 第五級,bureaucracy,n.,bureaucracies
 第五級,burial,n.,burials
 第五級,butcher,n./v.,"butchers,butchering,butchered"
+第五級,cactus,n.,cacti
 第五級,calcium,n.,calciums
 第五級,canal,n.,canals
 第五級,canvas,n./v.,"canvases,canvasing,canvased"
@@ -4828,7 +4829,7 @@
 第五級,specimen,n.,specimens
 第五級,spectacular,adj./n.,spectaculars
 第五級,spectator,n.,spectators
-第五級,spectrum,n.,spectrums
+第五級,spectrum,n.,spectra
 第五級,speculate,v.,"speculates,speculating,speculated"
 第五級,sphere,n.,spheres
 第五級,spicy,adj.,"spicier,spiciest"
@@ -5007,6 +5008,8 @@
 第五級,worship,n./v.,"worships,worshiping,worshiped"
 第五級,worthwhile,adj.,
 第五級,worthy,adj.,"worthier,worthiest"
+第五級,wreath,n.,wreaths
+第五級,wring,v.,"wrung,wrung,wringing,wrings"
 第五級,yacht,n./v.,"yachts,yachting,yachted"
 第五級,yield,v./n.,"yields,yielding,yielded"
 第六級,abbreviate,v.,"abbreviates,abbreviating,abbreviated"
@@ -5606,7 +5609,7 @@
 第六級,nucleus,n.,nuclei
 第六級,nude,adj./n.,"nudes,nuder,nudest"
 第六級,nurture,v./n.,"nurtures,nurturing,nurtured"
-第六級,oasis,n.,oasises
+第六級,oasis,n.,oases
 第六級,oath,n.,oaths
 第六級,oatmeal,n.,oatmeals
 第六級,oblige,v.,"obliges,obliging,obliged"
