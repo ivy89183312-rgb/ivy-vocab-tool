@@ -34,8 +34,8 @@
   --cl6: #c0006e;   /* 紅梅 hot magenta      ← clearly separate from L3 */
   --clA: #60584e;   /* 錆 rust gray */
 
-  --cl1-bg: #e2f4ea; --cl2-bg: #dae8fa; --cl3-bg: #ede0f8;
-  --cl4-bg: #fdf2cc; --cl5-bg: #fde8d8; --cl6-bg: #fce0ee;
+  --cl1-bg: #ccffcc; --cl2-bg: #ffff99; --cl3-bg: #99ddff;
+  --cl4-bg: #ccdcb4; --cl5-bg: #ffcccc; --cl6-bg: #d1b8ed;
   --clA-bg: #eceae6;
 
   --radius: 4px;
@@ -708,12 +708,12 @@ const EXAMS = {
   csat: {
     name: '學測／指考',
     levels: [
-      { id:'L1', name:'第一級', color:'#1e7a45', bg:'#e2f4ea' },
-      { id:'L2', name:'第二級', color:'#1a5cb5', bg:'#dae8fa' },
-      { id:'L3', name:'第三級', color:'#7025b8', bg:'#ede0f8' },
-      { id:'L4', name:'第四級', color:'#9a7000', bg:'#fdf2cc' },
-      { id:'L5', name:'第五級', color:'#c24000', bg:'#fde8d8' },
-      { id:'L6', name:'第六級', color:'#c0006e', bg:'#fce0ee' },
+      { id:'L1', name:'第一級', color:'#1e7a45', bg:'#ccffcc' },
+      { id:'L2', name:'第二級', color:'#1a5cb5', bg:'#ffff99' },
+      { id:'L3', name:'第三級', color:'#7025b8', bg:'#99ddff' },
+      { id:'L4', name:'第四級', color:'#9a7000', bg:'#ccdcb4' },
+      { id:'L5', name:'第五級', color:'#c24000', bg:'#ffcccc' },
+      { id:'L6', name:'第六級', color:'#c0006e', bg:'#d1b8ed' },
     ]
   },
   gept: {
@@ -858,9 +858,15 @@ function parseCsatCsv(rows) {
     '第一級':'L1','第二級':'L2','第三級':'L3',
     '第四級':'L4','第五級':'L5','第六級':'L6'
   };
-  // Level priority: L1 < L2 < ... < L6 (lower = more basic = keep)
-  const LEVEL_ORDER = {L1:1,L2:2,L3:3,L4:4,L5:5,L6:6};
   let count = 0;
+
+  // 將一筆結果加進 vocab.csat[word]（陣列），同一字同一級不重複，
+  // 但同一字不同級（例如 lay 本身是二級字，同時也是 lie 一級字的變化型態）都保留
+  function addEntry(word, entry) {
+    if (!vocab.csat[word]) vocab.csat[word] = [];
+    const arr = vocab.csat[word];
+    if (!arr.some(e => e.level === entry.level)) arr.push(entry);
+  }
 
   rows.forEach(r => {
     const level  = LEVEL_MAP[String(r['級數']||'').trim()];
@@ -881,17 +887,11 @@ function parseCsatCsv(rows) {
     const primary = variants[0];
     const entry = { level, pos: posRaw, zh: '' };
 
-    // For duplicate words, keep the lower (more basic) level
-    const existing = vocab.csat[primary];
-    if (!existing || LEVEL_ORDER[level] < LEVEL_ORDER[existing.level]) {
-      vocab.csat[primary] = entry;
-      if (!existing) count++;  // only count new entries
-    }
+    addEntry(primary, entry);
+    count++;
 
-    // Alias all other variants to the same entry (don't increment count)
-    variants.slice(1).forEach(v => {
-      if (!vocab.csat[v]) vocab.csat[v] = entry;
-    });
+    // Alias all other variants to the same entry
+    variants.slice(1).forEach(v => addEntry(v, entry));
 
     // 變化型態：逗號分隔的已變化表層形式（如 abilities / abler,ablest / acts,acting,acted）
     // 直接建立字典比對項，讓 lookupWord 不必仰賴詞形還原規則即可命中
@@ -899,12 +899,7 @@ function parseCsatCsv(rows) {
       formsRaw.split(/[,、，]/)
         .map(f => f.trim().toLowerCase())
         .filter(f => f.length >= 1 && /^[a-z]/i.test(f))
-        .forEach(f => {
-          const existingForm = vocab.csat[f];
-          if (!existingForm || LEVEL_ORDER[level] < LEVEL_ORDER[existingForm.level]) {
-            vocab.csat[f] = entry;
-          }
-        });
+        .forEach(f => addEntry(f, entry));
     }
   });
   return count;
@@ -1009,260 +1004,35 @@ function exportVocab() {
 // ═══════════════════════════════════════════════════════
 // ANALYZE
 // ═══════════════════════════════════════════════════════
-const SKIP = new Set(['a','an','the','is','are','was','were','be','been','being',
-  'i','we','you','he','she','they','it','my','our','your','his','her','its','their',
-  'me','us','him','them','of','in','on','at','to','for','and','but','or','nor',
-  'so','yet','as','if','this','these','those','with','by','from','up','about',
-  'into','out','off','over','have','has','had','do','does','did','will','would',
-  'shall','should','may','might','must','can','could','not','no','just','also',
-  'then','than','that','when','where','why','how','here','there','all','each',
-  'every','both','some','other','such','very','too','more','most','same','even',
-  'still','only','once','while','what','which','who','whom','whose','its','its']);
-
-function tokenize(text) {
-  const out = [];
-  const re  = /([A-Za-z]+(?:['-][A-Za-z]+)*)|([^A-Za-z]+)/g;
-  let m;
-  while ((m = re.exec(text)) !== null) {
-    out.push({ raw: m[0], isWord: !!m[1], lower: m[1]?.toLowerCase() || '' });
-  }
-  return out;
-}
-
-// ─── Lemmatizer: generates candidate base forms ──────
-const IRREGULAR_FORMS = {
-  // 不規則動詞過去式 / 過去分詞
-  'bought':'buy',    'brought':'bring',  'built':'build',
-  'caught':'catch',  'chose':'choose',   'chosen':'choose',
-  'came':'come',     'done':'do',
-  'drew':'draw',     'drawn':'draw',
-  'drank':'drink',   'drunk':'drink',
-  'drove':'drive',   'driven':'drive',
-  'ate':'eat',       'eaten':'eat',
-  'fell':'fall',     'fallen':'fall',    'felt':'feel',
-  'flew':'fly',      'flown':'fly',
-  'forgot':'forget', 'forgotten':'forget',
-  'forgave':'forgive','forgiven':'forgive',
-  'froze':'freeze',  'frozen':'freeze',
-  'found':'find',    'fought':'fight',
-  'gave':'give',     'given':'give',
-  'got':'get',       'gotten':'get',
-  'grew':'grow',     'grown':'grow',
-  'heard':'hear',    'held':'hold',
-  'hid':'hide',      'hidden':'hide',
-  'kept':'keep',
-  'knew':'know',     'known':'know',
-  'laid':'lay',      'led':'lead',
-  'left':'leave',    'lent':'lend',
-  'lit':'light',     'lost':'lose',
-  'made':'make',     'meant':'mean',     'met':'meet',
-  'paid':'pay',
-  'ran':'run',
-  'rang':'ring',     'rung':'ring',
-  'rode':'ride',     'ridden':'ride',
-  'rose':'rise',     'risen':'rise',
-  'said':'say',
-  'sang':'sing',     'sung':'sing',
-  'sank':'sink',     'sunk':'sink',
-  'sat':'sit',       'saw':'see',        'seen':'see',
-  'sent':'send',
-  'shook':'shake',   'shaken':'shake',   'shone':'shine',
-  'shot':'shoot',    'shown':'show',
-  'slept':'sleep',   'slid':'slide',
-  'spoke':'speak',   'spoken':'speak',
-  'spent':'spend',   'stood':'stand',
-  'stole':'steal',   'stolen':'steal',
-  'stuck':'stick',   'stung':'sting',    'struck':'strike',
-  'swam':'swim',     'swum':'swim',
-  'swept':'sweep',   'swore':'swear',    'sworn':'swear',
-  'swung':'swing',
-  'taught':'teach',  'thought':'think',
-  'threw':'throw',   'thrown':'throw',
-  'told':'tell',     'took':'take',      'taken':'take',
-  'tore':'tear',     'torn':'tear',
-  'understood':'understand',
-  'wept':'weep',
-  'withdrew':'withdraw', 'withdrawn':'withdraw',
-  'woke':'wake',     'woken':'wake',
-  'wore':'wear',     'worn':'wear',
-  'won':'win',       'wrote':'write',    'written':'write',
-  // 短字幹 -ing（5字母，不符合長度規則）
-  'using':'use',  'lying':'lie',  'dying':'die',  'tying':'tie',
-  // 代名詞變形
-  'them':'they', 'their':'they', 'theirs':'they',
-  'him':'he',    'her':'she',    'hers':'she',
-  'us':'we',
-  'me':'i',      'my':'i',       'mine':'i',
-  // 不規則複數
-  'children':'child', 'feet':'foot',  'teeth':'tooth',
-  'men':'man',        'women':'woman', 'mice':'mouse',
-  'geese':'goose',
-};
-function lemmatize(w) {
-  const IRREGULAR = {
-    'ground':'grind','earring':'earring',  'inning':'inning',
-    // be 動詞變形
-    'am':'be',   'is':'be',   'are':'be',
-    'was':'be',  'were':'be', 'been':'be',  'being':'be',
-    // 人稱代名詞變形
-    'him':'he',       'his':'he',       'himself':'he',
-    'me':'i',         'my':'i',         'mine':'i',        'myself':'i',
-    'its':'it',       'itself':'it',
-    'her':'she',      'hers':'she',     'herself':'she',
-    'them':'they',    'their':'they',   'theirs':'they',   'themselves':'they',
-    'us':'we',        'our':'we',       'ours':'we',       'ourselves':'we',
-    'your':'you',     'yours':'you',    'yourself':'you',  'yourselves':'you',
-    // have 變形
-    'has':'have',     'had':'have',
-    // 不規則動詞
-    'bought':'buy',    'brought':'bring',  'built':'build',
-    'caught':'catch',  'chose':'choose',   'chosen':'choose',
-    'came':'come',     'done':'do',
-    'drew':'draw',     'drawn':'draw',
-    'drank':'drink',   'drunk':'drink',
-    'drove':'drive',   'driven':'drive',
-    'ate':'eat',       'eaten':'eat',
-    'fell':'fall',     'fallen':'fall',    'felt':'feel',
-    'flew':'fly',      'flown':'fly',
-    'forgot':'forget', 'forgotten':'forget',
-    'forgave':'forgive','forgiven':'forgive',
-    'froze':'freeze',  'frozen':'freeze',
-    'found':'find',    'fought':'fight',
-    'gave':'give',     'given':'give',
-    'got':'get',       'gotten':'get',
-    'grew':'grow',     'grown':'grow',
-    'heard':'hear',    'held':'hold',
-    'hid':'hide',      'hidden':'hide',
-    'kept':'keep',
-    'knew':'know',     'known':'know',
-    'laid':'lay',      'led':'lead',
-    'left':'leave',    'lent':'lend',
-    'lit':'light',     'lost':'lose',
-    'made':'make',     'meant':'mean',     'met':'meet',
-    'paid':'pay',      'ran':'run',
-    'rang':'ring',     'rung':'ring',
-    'rode':'ride',     'ridden':'ride',
-    'rose':'rise',     'risen':'rise',
-    'said':'say',
-    'sang':'sing',     'sung':'sing',
-    'sank':'sink',     'sunk':'sink',
-    'sat':'sit',       'saw':'see',        'seen':'see',
-    'sent':'send',
-    'shook':'shake',   'shaken':'shake',   'shone':'shine',
-    'shot':'shoot',    'shown':'show',
-    'slept':'sleep',   'slid':'slide',
-    'spoke':'speak',   'spoken':'speak',
-    'spent':'spend',   'stood':'stand',
-    'stole':'steal',   'stolen':'steal',
-    'stuck':'stick',   'stung':'sting',    'struck':'strike',
-    'swam':'swim',     'swum':'swim',
-    'swept':'sweep',   'swore':'swear',    'sworn':'swear',
-    'swung':'swing',
-    'taught':'teach',  'thought':'think',
-    'threw':'throw',   'thrown':'throw',
-    'told':'tell',     'took':'take',      'taken':'take',
-    'tore':'tear',     'torn':'tear',
-    'understood':'understand',
-    'wept':'weep',
-    'withdrew':'withdraw','withdrawn':'withdraw',
-    'woke':'wake',     'woken':'wake',
-    'wore':'wear',     'worn':'wear',
-    'won':'win',       'wrote':'write',    'written':'write',
-    'using':'use',     'lying':'lie',      'dying':'die',   'tying':'tie',
-    'them':'they',     'their':'they',     'theirs':'they',
-    'him':'he',        'her':'she',        'hers':'she',
-    'us':'we',         'me':'i',           'my':'i',        'mine':'i',
-    'children':'child','feet':'foot',      'teeth':'tooth',
-    'men':'man',       'women':'woman',    'mice':'mouse',  'geese':'goose'
-  };
-
-  const c = [w];
-
-  if (IRREGULAR[w]) c.push(IRREGULAR[w]);
-
-  if (w.endsWith('ing') && w.length > 5) {
-    const s = w.slice(0,-3);
-    c.push(s, s+'e');
-    if (s.length >= 3 && s[s.length-1] === s[s.length-2]) c.push(s.slice(0,-1));
-  }
-  if (w.endsWith('ed') && w.length > 4) {
-    const s = w.slice(0,-2);
-    c.push(s, s+'e');
-    if (s.length >= 3 && s[s.length-1] === s[s.length-2]) c.push(s.slice(0,-1));
-  }
-  if (w.endsWith('d') && !w.endsWith('ed') && w.length > 3) c.push(w.slice(0,-1));
-  if (w.endsWith('ies') && w.length > 4) c.push(w.slice(0,-3)+'y');
-  if (w.endsWith('ves') && w.length > 4) c.push(w.slice(0,-3)+'f');
-  if (w.endsWith('es') && w.length > 4) c.push(w.slice(0,-2));
-  if (w.endsWith('s') && w.length > 3 && !w.endsWith('ss') && !w.endsWith('us')) c.push(w.slice(0,-1));
-  if (w.endsWith('er') && w.length > 4) {
-  const s = w.slice(0,-2);
-  c.push(s, s+'e');
-  // 排除本身就是獨立字的雙子音字，避免誤判
-  const ER_BLOCKLIST = new Set([
-    'summer','winter','butter','letter','matter','manner',
-    'hammer','inner','bitter','upper','offer','copper',
-    'ladder','chatter','potter','banner','better','flatter',
-    'litter','glitter','shimmer','flutter','mutter','gutter',
-    'stutter','dagger','pepper','dinner','supper'
-  ]);
-  if (!ER_BLOCKLIST.has(w) && s.length >= 3 && s[s.length-1] === s[s.length-2]) {
-    c.push(s.slice(0,-1));
-  }
-}
-  if (w.endsWith('est') && w.length > 5) {
-    c.push(w.slice(0,-3), w.slice(0,-3)+'e');
-  }
-  if (w.endsWith('ily') && w.length > 5) c.push(w.slice(0,-3)+'y');
-  if (w.endsWith('ly') && w.length > 4) {
-    const stem = w.slice(0,-2);
-    if (stem.length >= 4) { c.push(stem); c.push(stem+'e'); }
-    const LY_LE_BLOCKLIST = new Set(['apply','kindly']);
-    if (stem.length >= 3 && !LY_LE_BLOCKLIST.has(w)) { c.push(stem+'le'); }
-  }
-  if (w.endsWith('iness') && w.length > 6) c.push(w.slice(0,-5)+'y');
-  if (w.endsWith('ness') && w.length > 5) c.push(w.slice(0,-4));
-  if (w.endsWith('ment') && w.length > 6) c.push(w.slice(0,-4), w.slice(0,-4)+'e');
-  if (w.endsWith('ful') && w.length > 5) c.push(w.slice(0,-3));
-  if (w.endsWith('less') && w.length > 6) c.push(w.slice(0,-4));
-  if (w.endsWith('ation') && w.length > 7) c.push(w.slice(0,-5)+'e', w.slice(0,-5));
-
-  return [...new Set(c)];
-}
 
 function lookupWord(lower) {
   const results = [];
   const seen = new Set();
 
-  function addResult(info, matched) {
-    const key = `${matched}::${info.level}`; // 同字同級不重複
-    if (!seen.has(key)) {
-      seen.add(key);
-      results.push({ ...info, matched, surface: lower });
-    }
+  function addResult(entries, matched) {
+    if (!entries) return;
+    // vocab.csat 每個字存的是陣列（可能同時有多個字級，例如自己是一個字，
+    // 又是另一個字在「變化型態」欄位列出的變化形）
+    const arr = Array.isArray(entries) ? entries : [entries];
+    arr.forEach(info => {
+      const key = `${matched}::${info.level}`; // 同字同級不重複
+      if (!seen.has(key)) {
+        seen.add(key);
+        results.push({ ...info, matched, surface: lower });
+      }
+    });
   }
 
-  // 直接比對
-  const direct = vocab[currentExam]?.[lower];
-  if (direct) addResult(direct, lower);
+  // 直接比對：只比對字庫裡明確列出的字，以及 CSV「變化型態」欄位建立的比對項，
+  // 不再用字尾規則猜測詞形，避免誤判（衍生詞、意思不同的詞形變化請直接寫進 CSV）
+  addResult(vocab[currentExam]?.[lower], lower);
 
-  // 縮寫處理：haven't → have
+  // 縮寫處理：isn't → isn / haven't → haven（只做去掉 '(n)t 的字面切割，不做進一步猜測）
   if (lower.includes("'")) {
     const base = lower.split("'")[0];
     if (base.length >= 2) {
-      const found = vocab[currentExam]?.[base];
-      if (found) addResult(found, base);
-      for (const stem of lemmatize(base)) {
-        const fs = vocab[currentExam]?.[stem];
-        if (fs) addResult(fs, stem);
-      }
+      addResult(vocab[currentExam]?.[base], base);
     }
-  }
-
-  // 詞形還原候選
-  for (const base of lemmatize(lower)) {
-    const found = vocab[currentExam]?.[base];
-    if (found) addResult(found, base);
   }
 
   return results.length > 0 ? results : null;
