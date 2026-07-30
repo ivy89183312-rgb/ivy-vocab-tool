@@ -1070,7 +1070,7 @@ function lookupWord(lower) {
   const results = [];
   const seen = new Set();
 
-  function addResult(entries, matched) {
+  function addResult(entries, matched, extra = {}) {
     if (!entries) return;
     // vocab.csat 每個字存的是陣列（可能同時有多個字級，例如自己是一個字，
     // 又是另一個字在「變化型態」欄位列出的變化形）
@@ -1079,7 +1079,7 @@ function lookupWord(lower) {
       const key = `${matched}::${info.level}`; // 同字同級不重複
       if (!seen.has(key)) {
         seen.add(key);
-        results.push({ ...info, matched, surface: lower });
+        results.push({ ...info, matched, surface: lower, ...extra });
       }
     });
   }
@@ -1090,9 +1090,10 @@ function lookupWord(lower) {
 
   // 連字號複合詞：fast-changing 這種字庫裡通常沒有整串的複合詞，
   // 但組成的兩個字（fast、changing）各自都在字庫裡，所以拆開來分別比對
+  // viaHyphen 標記讓字詞對照表直接顯示拆出來的那個字，而不是整串複合詞
   if (lower.includes('-')) {
     lower.split('-').forEach(part => {
-      if (part.length >= 2) addResult(vocab[currentExam]?.[part], part);
+      if (part.length >= 2) addResult(vocab[currentExam]?.[part], part, { viaHyphen: true });
     });
   }
 
@@ -1276,6 +1277,7 @@ function renderTable() {
       surface: t.lower,
       word: info.matched,
       headword: info.headword,
+      viaHyphen: info.viaHyphen,
       pos: info.pos,
       zh: info.zh,
       level: info.level
@@ -1322,9 +1324,11 @@ function renderTable() {
       const lvCfg = cfg.levels.find(l => l.id === r.level);
       const c = '#000', bg = lvCfg?.bg||'#eceae6';
       const yahoo = `https://tw.dictionary.yahoo.com/dictionary?p=${encodeURIComponent(r.headword||r.surface)}`;
-      const wordCell = r.headword && r.headword !== r.surface
-        ? `${escHtml(r.surface)}<small style="color:var(--ink3);margin-left:4px">(${escHtml(r.headword)})</small>`
-        : escHtml(r.surface);
+      const wordCell = r.viaHyphen
+        ? escHtml(r.headword || r.word)
+        : (r.headword && r.headword !== r.surface
+            ? `${escHtml(r.surface)}<small style="color:var(--ink3);margin-left:4px">(${escHtml(r.headword)})</small>`
+            : escHtml(r.surface));
       const zhCell = r.zh
         ? escHtml(r.zh)
         : `<span class="zh-placeholder" data-word="${escHtml(r.word)}" data-idx="${i}" style="color:var(--ink4)">—</span>`;
