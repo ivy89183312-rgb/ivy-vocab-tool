@@ -860,6 +860,9 @@ function parseCsatCsv(rows) {
   };
   let count = 0;
 
+  // 每次重新解析都整個重建，避免跟舊格式（離線內建資料，單一物件非陣列）疊加時衝突
+  vocab.csat = {};
+
   // 將一筆結果加進 vocab.csat[word]（陣列），同一字同一級不重複，
   // 但同一字不同級（例如 lay 本身是二級字，同時也是 lie 一級字的變化型態）都保留
   function addEntry(word, entry) {
@@ -996,6 +999,7 @@ async function loadVocabFromGitHub({ silent } = {}) {
     if (tokens.length) { renderArticle(); renderTable(); }
     return true;
   } catch (err) {
+    console.error('[字詞表] 從 GitHub 讀取 CSV 失敗：', err);
     if (statEl) { statEl.textContent = Object.keys(vocab.csat||{}).length ? `✓ ${Object.keys(vocab.csat).length} 字（離線內建資料）` : '讀取失敗'; statEl.className = 'upload-slot-status' + (Object.keys(vocab.csat||{}).length ? ' loaded' : ''); }
     if (!silent) showAlert('setup', `⚠ 無法從 GitHub 讀取（${err.message}），目前使用離線內建字詞表。`, 'warn');
     return false;
