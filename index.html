@@ -753,7 +753,7 @@ const savedFilters = {};   // { examKey: Set<levelId> }
 // ═══════════════════════════════════════════════════════
 // INIT
 // ═══════════════════════════════════════════════════════
-;(function init() {
+function init() {
   loadVocabFromStorage();
   updateSetupStatus();
   updateSidebarStatus();
@@ -773,7 +773,7 @@ const savedFilters = {};   // { examKey: Set<levelId> }
       if (tokens.length) { renderArticle(); renderTable(); }
     });
   });
-})();
+}
 
 // ═══════════════════════════════════════════════════════
 // NAVIGATION
@@ -1532,6 +1532,9 @@ function showAlert(area, msg, type='info') {
     `<div class="alert alert-${type}"><span class="alert-icon">${icons[type]||'ℹ'}</span><span>${msg}</span></div>`;
   setTimeout(() => { const el = document.getElementById(`${area}-alert`); if(el) el.innerHTML = ''; }, 9000);
 }
+
+// 所有常數（含 BUNDLED_VOCAB）與函式都已宣告完成，這裡才真正啟動初始化
+init();
 </script>
 </body>
 </html>
