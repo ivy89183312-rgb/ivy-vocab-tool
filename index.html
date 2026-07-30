@@ -605,6 +605,9 @@ tr:last-child td { border-bottom: none; }
       <!-- BOTTOM: filter + results -->
       <div class="analyze-right">
         <div id="results-wrap">
+          <!-- 全文統計：總句數 / 總字數 / 字元數 -->
+          <div id="article-stats-bar"></div>
+
           <!-- Filter strip — inline bar -->
           <div style="display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:24px;padding:14px 20px;background:var(--white);border:1px solid var(--border);border-radius:var(--radius2);box-shadow:var(--shadow)">
             <span class="section-label" style="margin-bottom:0;padding-bottom:0;border-bottom:none;white-space:nowrap;margin-right:4px">程級篩選</span>
@@ -1032,6 +1035,37 @@ function tokenize(text) {
   return out;
 }
 
+// 全文統計：總句數（以 . ! ? 斷句）、總字數（英文單字）、字元數（含空格標點）
+function computeArticleStats(text, toks) {
+  const trimmed = text.trim();
+  const sentenceMatches = trimmed.match(/[^.!?]*[.!?]+/g) || [];
+  // 過濾掉純空白或沒有任何字母的片段（例如結尾多餘的標點）
+  const sentences = sentenceMatches.filter(s => /[A-Za-z]/.test(s)).length;
+  // 若文章結尾沒有標點符號，但確實還有內容，仍算最後一句
+  const matchedLen = sentenceMatches.join('').length;
+  const remainder = trimmed.slice(matchedLen).trim();
+  const totalSentences = sentences + (remainder && /[A-Za-z]/.test(remainder) ? 1 : 0);
+
+  const words = toks.filter(t => t.isWord).length;
+  const chars = trimmed.length;
+
+  return { sentences: totalSentences, words, chars };
+}
+
+function renderArticleStats(stats) {
+  const el = document.getElementById('article-stats-bar');
+  if (!el) return;
+  if (!stats) { el.innerHTML = ''; return; }
+  el.innerHTML = `
+    <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px;padding:12px 20px;background:var(--white);border:1px solid var(--border);border-radius:var(--radius2);box-shadow:var(--shadow);font-size:.85rem;color:var(--sumi)">
+      <span>總句數 <strong>${stats.sentences.toLocaleString()}</strong></span>
+      <span style="color:var(--border2)">｜</span>
+      <span>總字數 <strong>${stats.words.toLocaleString()}</strong></span>
+      <span style="color:var(--border2)">｜</span>
+      <span>字元數 <strong>${stats.chars.toLocaleString()}</strong></span>
+    </div>`;
+}
+
 function lookupWord(lower) {
   const results = [];
   const seen = new Set();
@@ -1077,6 +1111,7 @@ document.getElementById('analyze-btn').addEventListener('click', () => {
 
   document.getElementById('analyze-alert').innerHTML = '';
   tokens = tokenize(text);
+  renderArticleStats(computeArticleStats(text, tokens));
   // Restore previous filter selection for this exam, or default to all selected
   if (savedFilters[currentExam]) {
     activeFilters = new Set(savedFilters[currentExam]);
@@ -1099,6 +1134,7 @@ document.getElementById('clear-btn').addEventListener('click', () => {
   document.getElementById('word-table-area').innerHTML = '<div class="empty-state"><p>分析後顯示</p></div>';
   document.getElementById('summary-strip').innerHTML = '';
   document.getElementById('legend-row').innerHTML = '';
+  renderArticleStats(null);
 });
 
 function onInputChange() {
