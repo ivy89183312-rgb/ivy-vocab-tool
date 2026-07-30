@@ -630,7 +630,8 @@
 第一級,party,n./v.,"parties,partying,partied"
 第一級,pass,v./n.,"passes,passing,passed"
 第一級,past,adj./n./prep./adv.,
-第一級,pay(ment),v./(n.)      ,"pays,paying,paid,payments"
+第一級,pay,v./n.,"pays,paying,paid,payments"
+第一級,payment,v./n.,"pays,paying,paid,payments"
 第一級,pen,n./v.,"pens,penning,penned"
 第一級,pencil,n.,pencils
 第一級,people,n./v.,"peoples,peopling,peopled"
@@ -2530,7 +2531,8 @@
 第三級,meaningful,adj.,
 第三級,meanwhile,n./adv.,meanwhiles
 第三級,medal,n.,medals
-第三級,medium/media,n.,"media,medias"
+第三級,medium,n.,"media,medias"
+第三級,media,n.,"media,medias"
 第三級,melon,n.,melons
 第三級,melt,v.,"melts,melting,melted"
 第三級,mend,v.,"mends,mending,mended"
