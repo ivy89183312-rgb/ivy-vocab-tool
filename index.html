@@ -1018,6 +1018,16 @@ function exportVocab() {
 // ANALYZE
 // ═══════════════════════════════════════════════════════
 
+function tokenize(text) {
+  const out = [];
+  const re  = /([A-Za-z]+(?:['-][A-Za-z]+)*)|([^A-Za-z]+)/g;
+  let m;
+  while ((m = re.exec(text)) !== null) {
+    out.push({ raw: m[0], isWord: !!m[1], lower: m[1]?.toLowerCase() || '' });
+  }
+  return out;
+}
+
 function lookupWord(lower) {
   const results = [];
   const seen = new Set();
