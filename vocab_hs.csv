@@ -11,12 +11,13 @@
 第一級,actor/actress,n.,"actors,actresses"
 第一級,add,v.,"adds,adding,added"
 第一級,afraid,adj.,
-第一級,after,prep./conj./adv. ask v.,
+第一級,after,prep./conj./adv.,
+第一級,ask,v.,"asks,asking,asked"
 第一級,afternoon,n.,afternoons
 第一級,again,adv.,
 第一級,age,n./v.,"ages,aging,aged"
 第一級,ago,adv.,
-第一級,agree(ment),v./(n.)    ,"agrees,agreeing,agreed,agreements"
+第一級,agree(ment),v./n.,"agree,agrees,agreeing,agreed,agreement,agreements"
 第一級,air,n.,
 第一級,airplane/plane,n.,"airplanes,planes"
 第一級,airport,n.,airports
@@ -262,7 +263,7 @@
 第一級,email,n./v.,"emails,emailing,emailed"
 第一級,end,n./v.,"ends,ending,ended"
 第一級,engineer,n.,engineers
-第一級,enjoy(ment),v./(n.),"enjoys,enjoying,enjoyed,enjoyments"
+第一級,enjoy(ment),v./n.,"enjoys,enjoying,enjoyed,enjoyment,enjoyments"
 第一級,enough,adv./adj./n.,
 第一級,enter,v.,"enters,entering,entered"
 第一級,envelope,n.,envelopes
@@ -272,7 +273,8 @@
 第一級,evening,n.,evenings
 第一級,ever,adv.,
 第一級,every,adj.,
-第一級,everyone/everybody,n./v.,"everyones,everyoning,everyoned,everybodies,everybodying,everybodied"
+第一級,everyone,pron.,
+第一級,everybody,pron.,
 第一級,everything,pron.,
 第一級,example,n.,examples
 第一級,excellent,adj.,
@@ -350,7 +352,7 @@
 第一級,glad,adj.,"gladder,gladdest"
 第一級,glass,n.,glasses
 第一級,glasses,n.,
-第一級,glove(s),n.,gloves
+第一級,glove(s),n.,"glove,gloves"
 第一級,go,v./n.,"goes,going,went,gone"
 第一級,god/goddess,n.,"gods,goddesses"
 第一級,good,adj./adv./n.,"goods,better,best"
@@ -380,7 +382,7 @@
 第一級,hat,n.,hats
 第一級,hate,v./n.,"hates,hating,hated"
 第一級,have,aux./v.,"has,having,had"
-第一級,"he (him, his, himself) ",pron.,"him,his,himself"
+第一級,"he (him, his, himself) ",pron.,"he,him,his,himself"
 第一級,head,n./v.,"heads,heading,headed"
 第一級,headache,n.,headaches
 第一級,health,n.,
@@ -421,7 +423,7 @@
 第一級,hungry,adj.,"hungrier,hungriest"
 第一級,hurt,v./n.,"hurts,hurting,hurt"
 第一級,husband,n.,husbands
-第一級,"I (me, my, mine, myself) ",pron.,"me,my,mine,myself"
+第一級,"I (me, my, mine, myself) ",pron.,"I,me,my,mine,myself"
 第一級,ice,n.,ices
 第一級,idea,n.,ideas
 第一級,if,conj.,
@@ -557,7 +559,7 @@
 第一級,mountain,n.,mountains
 第一級,mouse,n.,mice
 第一級,mouth,n./v.,"mouths,mouthing,mouthed"
-第一級,move(ment),v./(n.),"moves,moving,moved,movements"
+第一級,move(ment),v./n.,"moves,moving,moved,movement,movements"
 第一級,movie/film,n.,"movies,films"
 第一級,Mr./Mister,n.,Misters
 第一級,Mrs.,n.,
@@ -624,7 +626,7 @@
 第一級,pair,n.,pairs
 第一級,pants,n.,pantses
 第一級,paper,n./v.,"papers,papering,papered"
-第一級,parent(s),n.,parents
+第一級,parent(s),n.,"parent,parents"
 第一級,park,n./v.,"parks,parking,parked"
 第一級,part,n./v.,"parts,parting,parted"
 第一級,party,n./v.,"parties,partying,partied"
@@ -761,11 +763,11 @@
 第一級,shape,n.,shapes
 第一級,share,v./n.,"shares,sharing,shared"
 第一級,sharp,adj./adv.,"sharper,sharpest"
-第一級,"she (her, hers, herself)",pron.,"her,hers,herself"
+第一級,"she (her, hers, herself)",pron.,"she,her,hers,herself"
 第一級,sheep,n.,
 第一級,ship,n./v.,"ships,shipping,shipped"
 第一級,shirt,n.,shirts
-第一級,shoe(s),n.,shoes
+第一級,shoe(s),n.,"shoe,shoes"
 第一級,shop,n./v.,"shops,shopping,shopped"
 第一級,short,adj.,"shorter,shortest"
 第一級,shorts,n.,shortses
@@ -877,7 +879,7 @@
 第一級,then,adv./adj.,
 第一級,there,adv./n.,theres
 第一級,these,pron./adj.,
-第一級,"they (them, their, theirs, themselves)",pron.,"them,their,theirs,themselves"
+第一級,"they (them, their, theirs, themselves)",pron.,"they,them,their,theirs,themselves"
 第一級,thick,adj.,"thicker,thickest"
 第一級,thin,adj.,"thinner,thinnest"
 第一級,thing,n.,things
@@ -917,7 +919,7 @@
 第一級,toy,n.,toys
 第一級,traffic,n./v.,"traffics,trafficking,trafficked"
 第一級,train,n./v.,"trains,training,trained"
-第一級,treat(ment),v./(n.),"treats,treating,treated,treatments"
+第一級,treat(ment),v./n.,"treats,treating,treated,treatment,treatments"
 第一級,tree,n.,trees
 第一級,trip,n./v.,"trips,tripping,tripped"
 第一級,trouble,n./v.,"troubles,troubling,troubled"
@@ -952,7 +954,7 @@
 第一級,water,n./v.,"waters,watering,watered"
 第一級,wave,n./v.,"waves,waving,waved"
 第一級,way,n.,ways
-第一級,"we (us, our, ours, ourselves)",pron.,"us,our,ours,ourselves"
+第一級,"we (us, our, ours, ourselves)",pron.,"we,us,our,ours,ourselves"
 第一級,weak,adj.,"weaker,weakest"
 第一級,wear,v.,"wears,wearing,wore,worn"
 第一級,weather,n./v.,"weathers,weathering,weathered"
@@ -998,7 +1000,7 @@
 第一級,yes/yeah,adv./n.,"yeses,yeahs"
 第一級,yesterday,adv./n.,yesterdays
 第一級,yet,adv./conj.,
-第一級,"you (your, yours, yourself, yourselves)",pron.,"your,yours,yourself,yourselves"
+第一級,"you (your, yours, yourself, yourselves)",pron.,"you,your,yours,yourself,yourselves"
 第一級,young,adj./n.,"youngs,younger,youngest"
 第一級,zero,n.,zeros
 第一級,zoo,n.,zoos
@@ -1045,9 +1047,9 @@
 第二級,apply,v.,"applies,applying,applied"
 第二級,appreciate,v.,"appreciates,appreciating,appreciated"
 第二級,approach,n./v.,"approaches,approaching,approached"
-第二級,argue(argument),v.,"argues,arguing,argued"
+第二級,argue(argument),v./n,,"argues,arguing,argued,argument,arguments"
 第二級,army,n.,armies
-第二級,arrange(ment),v.,"arranges,arranging,arranged"
+第二級,arrange(ment),v./n.,"arranges,arranging,arranged,arrangement,arrangements"
 第二級,arrival,n.,arrivals
 第二級,arrow,n.,arrows
 第二級,article,n.,articles
@@ -1124,7 +1126,7 @@
 第二級,café/cafe,n.,"cafés,caves"
 第二級,cage,n./v.,"cages,caging,caged"
 第二級,calendar,n.,calendars
-第二級,calm,v./adj.,"calms,calming,calmed,calmer,calmest"
+第二級,calm,v./adj./n.,"calms,calming,calmed,calmer,calmest"
 第二級,camel,n.,camels
 第二級,cancel,v.,"cancels,canceling,canceled"
 第二級,cancer,n.,cancers
@@ -1157,7 +1159,7 @@
 第二級,childhood,n.,childhoods
 第二級,childish,adj.,
 第二級,china,n.,chinas
-第二級,chopstick(s),n.,chopsticks
+第二級,chopstick(s),n.,"chopsticks,chopstick"
 第二級,claim,n./v.,"claims,claiming,claimed"
 第二級,clap,v./n.,"claps,clapping,clapped"
 第二級,classic,adj./n.,classics
@@ -1178,7 +1180,7 @@
 第二級,college,n.,colleges
 第二級,comb,n./v.,"combs,combing,combed"
 第二級,combine,v.,"combines,combining,combined"
-第二級,comic(s),adj./n.,comics
+第二級,comic(s),adj./n.,"comic,comics"
 第二級,command,n./v.,"commands,commanding,commanded"
 第二級,commercial,adj./n.,commercials
 第二級,company,n.,companies
@@ -1190,7 +1192,7 @@
 第二級,condition,n./v.,"conditions,conditioning,conditioned"
 第二級,confident,adj.,
 第二級,conflict,n./v.,"conflicts,conflicting,conflicted"
-第二級,congratulation(s),n.,congratulations
+第二級,congratulation(s),n.,"congratulation,congratulations"
 第二級,connection,n.,connections
 第二級,consider,v.,"considers,considering,considered"
 第二級,consideration,n.,considerations
@@ -1247,7 +1249,7 @@
 第二級,desert,n./v.,"deserts,deserting,deserted"
 第二級,design,n./v.,"designs,designing,designed"
 第二級,detail,n./v.,"details,detailing,detailed"
-第二級,develop(ment),v.,"develops,developing,developed"
+第二級,develop(ment),v./n.,"develops,developing,developed,development,developments"
 第二級,dial,n./v.,"dials,dialing,dialed"
 第二級,dialogue,n.,dialogues
 第二級,diamond,n.,diamonds
@@ -1258,7 +1260,7 @@
 第二級,direct,adj./v./adv.,"directs,directing,directed"
 第二級,direction,n.,directions
 第二級,director,n.,directors
-第二級,disagree(ment),v.,"disagrees,disagreeing,disagreed"
+第二級,disagree(ment),v./n.,"disagrees,disagreeing,disagreed,disagreements"
 第二級,disappear,v.,"disappears,disappearing,disappeared"
 第二級,discover,v.,"discovers,discovering,discovered"
 第二級,discovery,n.,discoveries
@@ -1288,7 +1290,7 @@
 第二級,duty,n.,duties
 第二級,eagle,n.,eagles
 第二級,earn,v.,"earns,earning,earned"
-第二級,earring(s),n.,earrings
+第二級,earring(s),n.,"earrings,earring"
 第二級,earthquake,n.,earthquakes
 第二級,ease,n./v.,"eases,easing,eased"
 第二級,eastern,adj.,
@@ -1303,11 +1305,11 @@
 第二級,electrical,adj.,
 第二級,emotion,n.,emotions
 第二級,emphasize,v.,"emphasizes,emphasizing,emphasized"
-第二級,employ(ment),v.,"employs,employing,employed"
+第二級,employ(ment),v./n,,"employs,employing,employed,employments"
 第二級,employee,n.,employees
 第二級,employer,n.,employers
 第二級,empty,adj./v.,"empties,emptying,emptied,emptier,emptiest"
-第二級,encourage(ment),v.,"encourages,encouraging,encouraged"
+第二級,encourage(ment),v./n.,"encourages,encouraging,encouraged,encouragements"
 第二級,ending,n.,endings
 第二級,enemy,n.,enemies
 第二級,energy,n.,energies
@@ -1326,7 +1328,7 @@
 第二級,exact,adj.,
 第二級,examination/exam,n.,"examinations,exams"
 第二級,examine,v.,"examines,examining,examined"
-第二級,excite(ment),v.,"excites,exciting,excited"
+第二級,excite(ment),v./n.,"excites,exciting,excited,excitement"
 第二級,excuse,v./n.,"excuses,excusing,excused"
 第二級,exist,v.,"exists,existing,existed"
 第二級,existence,n.,existences
@@ -1452,7 +1454,7 @@
 第二級,imagine,v.,"imagines,imagining,imagined"
 第二級,importance,n.,importances
 第二級,impressive,adj.,
-第二級,improve(ment),v.,"improves,improving,improved"
+第二級,improve(ment),v./n.,"improves,improving,improved,improvements"
 第二級,include,v.,"includes,including,included"
 第二級,income,n.,incomes
 第二級,increase,v./n.,"increases,increasing,increased"
@@ -1522,7 +1524,7 @@
 第二級,maintain,v.,"maintains,maintaining,maintained"
 第二級,major,adj./n./v.,"majors,majoring,majored"
 第二級,male,adj./n.,
-第二級,manage(ment),v.,"manages,managing,managed"
+第二級,manage(ment),v./n.,"manages,managing,managed,management,managements"
 第二級,manager,n.,managers
 第二級,mango,n.,mangoes
 第二級,manner,n.,manners
@@ -1538,7 +1540,7 @@
 第二級,mature,adj.,
 第二級,meaning,n.,meanings
 第二級,means,n.,meanses
-第二級,measure(ment),v.,"measures,measuring,measured"
+第二級,measure(ment),v./n.,"measures,measuring,measured,measurement,measurements"
 第二級,medical,adj.,
 第二級,melody,n.,melodies
 第二級,membership,n.,memberships
@@ -1690,7 +1692,7 @@
 第二級,provide,v.,"provides,providing,provided"
 第二級,pudding,n.,puddings
 第二級,pumpkin,n.,pumpkins
-第二級,punish(ment),v.,"punishes,punishing,punished"
+第二級,punish(ment),v./n.,"punishes,punishing,punished,punishment,"
 第二級,pupil,n.,pupils
 第二級,puppy,n.,puppies
 第二級,purple,adj./n.,"purples,purpler,purplest"
@@ -1726,7 +1728,7 @@
 第二級,rent,n./v.,"rents,renting,rented"
 第二級,repair,n./v.,"repairs,repairing,repaired"
 第二級,reply,n./v.,"replies,replying,replied"
-第二級,require(ment),v.,"requires,requiring,required"
+第二級,require(ment),v./n.,"requires,requiring,required,requirement,requirements"
 第二級,respect,n./v.,"respects,respecting,respected"
 第二級,respond,v.,"responds,responding,responded"
 第二級,responsible,adj.,
@@ -1779,7 +1781,7 @@
 第二級,separate,adj./v.,"separates,separating,separated"
 第二級,servant,n.,servants
 第二級,serve,v.,"serves,serving,served"
-第二級,settle(ment),v.,"settles,settling,settled"
+第二級,settle(ment),v./n.,"settles,settling,settled,settlement,settlements"
 第二級,sex,n.,sexes
 第二級,shame,n./v.,"shames,shaming,shamed"
 第二級,shark,n.,sharks
@@ -1843,7 +1845,7 @@
 第二級,stage,n./v.,"stages,staging,staged"
 第二級,stamp,n./v.,"stamps,stamping,stamped"
 第二級,standard,adj./n.,standards
-第二級,state(ment),v.,"states,stating,stated"
+第二級,state(ment),v./n.,"states,stating,stated,statement,statements"
 第二級,steak,n.,steaks
 第二級,steel,n./v.,"steels,steeling,steeled"
 第二級,step,n./v.,"steps,stepping,stepped"
@@ -2127,7 +2129,7 @@
 第三級,canyon,n.,canyons
 第三級,capable,adj.,
 第三級,captain,n.,captains
-第三級,capture,v.,"captures,capturing,captured"
+第三級,capture,v./n.,"captures,capturing,captured"
 第三級,career,n.,careers
 第三級,carpenter,n.,carpenters
 第三級,carpet,n./v.,"carpets,carpeting,carpeted"
@@ -2367,7 +2369,7 @@
 第三級,golf,n./v.,"golves,golfs,golfing,golfed"
 第三級,gossip,n./v.,"gossips,gossiping,gossiped"
 第三級,governor,n.,governors
-第三級,grab,n./v.,"grabs,grabbing,grabbed"
+第三級,grab,v./n.,"grabs,grabbing,grabbed"
 第三級,graduate,n./v.,"graduates,graduating,graduated"
 第三級,grasp,v./n.,"grasps,grasping,grasped"
 第三級,grasshopper,n.,grasshoppers
@@ -4122,7 +4124,6 @@
 第五級,bureaucracy,n.,bureaucracies
 第五級,burial,n.,burials
 第五級,butcher,n./v.,"butchers,butchering,butchered"
-第五級,cactus,n.,cacti
 第五級,calcium,n.,calciums
 第五級,canal,n.,canals
 第五級,canvas,n./v.,"canvases,canvasing,canvased"
@@ -5010,8 +5011,6 @@
 第五級,worship,n./v.,"worships,worshiping,worshiped"
 第五級,worthwhile,adj.,
 第五級,worthy,adj.,"worthier,worthiest"
-第五級,wreath,n.,wreaths
-第五級,wring,v.,"wrung,wrung,wringing,wrings"
 第五級,yacht,n./v.,"yachts,yachting,yachted"
 第五級,yield,v./n.,"yields,yielding,yielded"
 第六級,abbreviate,v.,"abbreviates,abbreviating,abbreviated"
@@ -5357,7 +5356,8 @@
 第六級,feminine,adj./n.,feminines
 第六級,fertility,n.,fertilities
 第六級,fertilizer,n.,fertilizers
-第六級,fianc./fiance,n.,fiances
+第六級,flancé,n.,fiancés
+第六級,flance,n.,fiances
 第六級,fin,n.,fins
 第六級,finite,adj.,
 第六級,firecracker,n.,firecrackers
@@ -5482,7 +5482,7 @@
 第六級,intrigue,n./v.,"intrigues,intriguing,intrigued"
 第六級,intrude,v.,"intrudes,intruding,intruded"
 第六級,intruder,n.,intruders
-第六級,invaluable,adv.,
+第六級,invaluable,adj.,
 第六級,invariably,adv.,
 第六級,inventory,n./v.,"inventories,inventorying,inventoried"
 第六級,ironic,adj.,
