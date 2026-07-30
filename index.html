@@ -1088,6 +1088,14 @@ function lookupWord(lower) {
   // 不再用字尾規則猜測詞形，避免誤判（衍生詞、意思不同的詞形變化請直接寫進 CSV）
   addResult(vocab[currentExam]?.[lower], lower);
 
+  // 連字號複合詞：fast-changing 這種字庫裡通常沒有整串的複合詞，
+  // 但組成的兩個字（fast、changing）各自都在字庫裡，所以拆開來分別比對
+  if (lower.includes('-')) {
+    lower.split('-').forEach(part => {
+      if (part.length >= 2) addResult(vocab[currentExam]?.[part], part);
+    });
+  }
+
   // 縮寫處理：isn't → isn / haven't → haven（只做去掉 '(n)t 的字面切割，不做進一步猜測）
   if (lower.includes("'")) {
     const base = lower.split("'")[0];
