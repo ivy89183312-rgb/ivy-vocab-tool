@@ -522,6 +522,40 @@ tr:last-child td { border-bottom: none; }
 ::-webkit-scrollbar { width: 5px; height: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+/* ════════════════════════════════════════
+   FLOATING 問題回報 BUTTON
+════════════════════════════════════════ */
+#report-fab {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 48px;
+  padding: 0 18px 0 14px;
+  border-radius: 999px;
+  background: var(--sumi);
+  color: var(--washi);
+  text-decoration: none;
+  font-size: .8rem;
+  font-weight: 500;
+  letter-spacing: .02em;
+  box-shadow: var(--shadow2);
+  transition: transform .18s, box-shadow .18s, background .18s;
+}
+#report-fab svg { flex-shrink: 0; }
+#report-fab:hover {
+  background: var(--cha);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(27,25,21,.22);
+}
+@media (max-width: 640px) {
+  #report-fab span { display: none; }
+  #report-fab { padding: 0; width: 48px; justify-content: center; }
+}
 </style>
 </head>
 <body>
@@ -696,13 +730,29 @@ tr:last-child td { border-bottom: none; }
 
       <div class="divider"></div>
       <div class="section-label">管理</div>
-      <div class="btn-row">
-        <button class="btn btn-primary" onclick="reloadVocabFromGitHub()">重新整理字詞表</button>
-        <button class="btn btn-outline" onclick="exportVocab()">匯出 JSON 備份</button>
       </div>
     </div>
+
+    <!-- ── REPORT PAGE ── -->
   </main>
 </div>
+
+<!-- ╔═══════════════════════════════╗ -->
+<!-- ║   FLOATING 問題回報 BUTTON    ║ -->
+<!-- ╚═══════════════════════════════╝ -->
+<a
+  id="report-fab"
+  href="https://docs.google.com/forms/d/e/1FAIpQLSdH-oPltMfIORkWzvjOpCw24XKj8qTEnOYwztfgnVHfQt0iPg/viewform?usp=dialog"
+  target="_blank"
+  rel="noopener"
+  title="問題回報">
+  <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" width="22" height="22">
+    <path d="M10 6v5"/>
+    <circle cx="10" cy="14" r="0.6" fill="currentColor" stroke="none"/>
+    <circle cx="10" cy="10" r="8"/>
+  </svg>
+  <span>問題回報</span>
+</a>
 
 <script>
 // ═══════════════════════════════════════════════════════
