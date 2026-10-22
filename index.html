@@ -25,14 +25,8 @@
   --cha:       #7c6a52;   /* 茶色 accent */
   --cha-light: #f0ead8;
 
-  /* Level colours — six distinct hues around the colour wheel */
-  --cl1: #1e7a45;   /* 松葉 green */
-  --cl2: #1a5cb5;   /* 瑠璃 blue */
-  --cl3: #7025b8;   /* 江戸紫 vivid purple  ← was close to L6 */
-  --cl4: #9a7000;   /* 琥珀 amber gold       ← was close to L5 */
-  --cl5: #c24000;   /* 橙朱 burnt orange     ← was close to L4/L6 */
-  --cl6: #c0006e;   /* 紅梅 hot magenta      ← clearly separate from L3 */
-  --clA: #60584e;   /* 錆 rust gray */
+  /* Level colours（以學測色票為準）*/
+  --clA: #60584e;   /* 未收錄字的文字色 */
 
   --cl1-bg: #ccffcc; --cl2-bg: #ffff99; --cl3-bg: #99ddff;
   --cl4-bg: #ccdcb4; --cl5-bg: #ffcccc; --cl6-bg: #d1b8ed;
@@ -352,6 +346,13 @@ textarea#article-input {
 }
 .filter-badge input { display: none; }
 .filter-badge .pip { width: 7px; height: 7px; border-radius: 50%; }
+.filter-badge.on .pip {
+  /* 選取時底色與圓點同色，改顯示打勾，避免看起來像左邊空一塊 */
+  background: none !important; border-radius: 0;
+  width: 4px; height: 8px; margin: 0 1.5px 2px;
+  border: solid #000; border-width: 0 1.5px 1.5px 0;
+  transform: rotate(45deg);
+}
 .filter-badge:hover { border-color: var(--ink2); color: var(--ink2); }
 .filter-badge.on { border-width: 1.5px; }
 
@@ -960,16 +961,16 @@ const EXAMS = {
   gept: {
     name: '全民英檢',
     levels: [
-      { id:'L1', name:'初級',   color:'#1e7a45', bg:'#e2f4ea' },
-      { id:'L2', name:'中級',   color:'#1a5cb5', bg:'#dae8fa' },
-      { id:'L3', name:'中高級', color:'#7025b8', bg:'#ede0f8' },
+      { id:'L1', name:'初級',   color:'#ccffcc', bg:'#ccffcc' },
+      { id:'L2', name:'中級',   color:'#ffff99', bg:'#ffff99' },
+      { id:'L3', name:'中高級', color:'#99ddff', bg:'#99ddff' },
     ]
   },
   jcee: {
     name: '國中會考',
     levels: [
-      { id:'L1', name:'常用 800字',  color:'#1e7a45', bg:'#e2f4ea' },
-      { id:'L2', name:'基本 1200字', color:'#1a5cb5', bg:'#dae8fa' },
+      { id:'L1', name:'常用 800字',  color:'#ccffcc', bg:'#ccffcc' },
+      { id:'L2', name:'基本 1200字', color:'#ffff99', bg:'#ffff99' },
     ]
   }
 };
