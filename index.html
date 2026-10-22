@@ -718,7 +718,7 @@ tr:last-child td { border-bottom: none; }
           </button>
           <div class="nav-menu" role="menu">
             <button type="button" role="menuitem" data-ref-exam="csat" onclick="openReference('csat')">
-              學測／指考 <small id="ref-menu-count-csat"></small>
+              學測 <small id="ref-menu-count-csat"></small>
             </button>
             <button type="button" role="menuitem" data-ref-exam="gept" onclick="openReference('gept')">
               全民英檢 <small id="ref-menu-count-gept"></small>
@@ -771,7 +771,7 @@ tr:last-child td { border-bottom: none; }
             <p class="page-sub" style="margin-bottom:0">貼入英文文章，依載入的字詞表自動標色分級</p>
           </div>
           <div class="tab-strip" id="exam-tabs" style="margin-bottom:0;align-self:center">
-            <button class="tab active" data-exam="csat">學測／指考</button>
+            <button class="tab active" data-exam="csat">學測</button>
             <button class="tab" data-exam="gept">全民英檢</button>
             <button class="tab" data-exam="jcee">國中會考</button>
           </div>
@@ -835,7 +835,7 @@ tr:last-child td { border-bottom: none; }
 
     <!-- ── REFERENCE PAGE（參考詞彙） ── -->
     <div class="page" id="page-reference">
-      <h2 class="page-title" id="ref-title">學測／指考參考詞彙</h2>
+      <h2 class="page-title" id="ref-title">學測參考詞彙</h2>
       <p class="page-sub" id="ref-sub" style="margin-bottom:20px"></p>
 
       <div class="ref-toolbar">
@@ -861,7 +861,7 @@ tr:last-child td { border-bottom: none; }
         <span style="font-size:1rem;flex-shrink:0">☁</span>
         <div style="font-size:.78rem;line-height:1.9;color:var(--ink2)">
           <strong style="color:var(--sumi)">資料來源</strong>　網頁開啟時會自動向 GitHub 讀取最新的字詞表 CSV。<br>
-          學測／指考欄位：<code style="background:var(--border2);padding:1px 6px;border-radius:3px;font-family:'DM Mono',monospace">級數, 字彙, 詞性, 中文釋義, 變化型態, 衍生副詞</code>
+          學測欄位：<code style="background:var(--border2);padding:1px 6px;border-radius:3px;font-family:'DM Mono',monospace">級數, 字彙, 詞性, 中文釋義, 變化型態, 衍生副詞</code>
           &nbsp;·&nbsp; 級數值：第一級 ～ 第六級<br>
           <span style="color:var(--ink3)">※ 如需更新字詞表內容，請直接更新 GitHub 上的 CSV 檔案；本頁不需重新部署即可自動抓到最新版本。</span>
         </div>
@@ -874,7 +874,7 @@ tr:last-child td { border-bottom: none; }
         <!-- CSAT -->
         <div class="card upload-slot" id="slot-csat-all">
           <div class="upload-slot-header">
-            <span style="font-weight:600;color:var(--sumi)">學測／指考</span>
+            <span style="font-weight:600;color:var(--sumi)">學測</span>
             <span style="display:flex;align-items:center;gap:6px">
               <span class="upload-slot-status" id="status-csat-all">尚未載入</span>
             </span>
@@ -947,7 +947,7 @@ tr:last-child td { border-bottom: none; }
 // ═══════════════════════════════════════════════════════
 const EXAMS = {
   csat: {
-    name: '學測／指考',
+    name: '學測',
     levels: [
       { id:'L1', name:'第一級', color:'#ccffcc', bg:'#ccffcc' },
       { id:'L2', name:'第二級', color:'#ffff99', bg:'#ffff99' },
@@ -1983,7 +1983,7 @@ function renderSuggest(qRaw) {
 
   if (!q) {
     body.innerHTML = `<div class="lookup-hint">
-      輸入英文單字可查看學測／指考、全民英檢、國中會考的級數、詞性、中文釋義與變化型態，例如 running、achievement、him。<br>
+      輸入英文單字可查看學測、全民英檢、國中會考的級數、詞性、中文釋義與變化型態，例如 running、achievement、him。<br>
       也可以輸入中文，例如「環境」。<br>
       在文章分析的標色字詞、參考詞彙的任一列上點一下，也會在這裡顯示。<br>
       任何頁面按 <span class="kbd">/</span> 都能叫出查詢框。
